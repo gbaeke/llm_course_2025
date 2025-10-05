@@ -1,0 +1,7 @@
+openai
+python-dotenv
+azure-identity
+pydantic
+azure-ai-projects
+azure-ai-inference
+rich
