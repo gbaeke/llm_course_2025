@@ -11,7 +11,7 @@ This module demonstrates:
 import asyncio
 import sys
 from datetime import datetime
-from typing import Optional
+from typing import Annotated, Optional
 
 from fastmcp import FastMCP, Client
 
@@ -29,29 +29,25 @@ mcp = FastMCP(
 )
 
 
-@mcp.tool
-def hello(name: str) -> str:
-    """Greet a user by name."""
+@mcp.tool(description="Greet a user by name")
+def hello(name: Annotated[str, "The name of the user to greet"]) -> str:
     return f"Hello, {name}! Welcome to the basic MCP server."
 
 
-@mcp.tool
-def add(a: float, b: float) -> float:
-    """Add two numbers together."""
+@mcp.tool(description="Add two numbers together")
+def add(a: Annotated[float, "First number to add"], b: Annotated[float, "Second number to add"]) -> float:
     result = a + b
     return result
 
 
-@mcp.tool
+@mcp.tool(description="Get the current time")
 def get_time() -> str:
-    """Get the current time."""
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return f"Current time: {current_time}"
 
 
-@mcp.tool
-def calculate(expression: str) -> str:
-    """Safely evaluate a mathematical expression."""
+@mcp.tool(description="Safely evaluate a mathematical expression")
+def calculate(expression: Annotated[str, "Mathematical expression to evaluate (only basic operations allowed)"]) -> str:
     try:
         # Only allow basic mathematical operations for safety
         allowed_chars = set('0123456789+-*/.() ')
