@@ -5,3 +5,10 @@ pydantic
 azure-ai-projects
 azure-ai-inference
 rich
+langchain
+langchain-core
+langchain-openai
+langgraph
+fastmcp
+uvicorn
+azure-search-documents

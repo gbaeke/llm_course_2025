@@ -1,0 +1,6 @@
+python-dotenv
+pydantic
+uvicorn
+fastmcp
+azure-search-documents
+azure-identity

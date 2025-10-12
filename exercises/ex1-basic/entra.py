@@ -1,5 +1,5 @@
 import os
-from openai import OpenAI
+from openai import OpenAI, AzureOpenAI
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from dotenv import load_dotenv
 
@@ -15,7 +15,6 @@ if not azure_resource:
 token_provider = get_bearer_token_provider(
     DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
 )
-
 
 client = OpenAI(
     api_key=token_provider,
