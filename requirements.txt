@@ -9,6 +9,7 @@ langchain
 langchain-core
 langchain-openai
 langgraph
+langchain-mcp-adapters
 fastmcp
 uvicorn
 azure-search-documents

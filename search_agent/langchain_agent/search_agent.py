@@ -48,6 +48,9 @@ def search_azure_ai(query: str, max_results: int = 5) -> str:
     Returns:
         Formatted search results as a string
     """
+    # Show the search query to the user
+    print(f"\n🔍 Searching for: '{query}'")
+    
     async def _search():
         try:
             mcp_server_url = os.getenv("MCP_SERVER_URL", "http://localhost:8050/mcp")
@@ -78,17 +81,29 @@ def search_azure_ai(query: str, max_results: int = 5) -> str:
                     "max_results": max_results
                 })
                 logger.debug(f"Search completed successfully, result type: {type(result)}")
-                return str(result)
+                
+                # Show search results summary to user
+                result_str = str(result)
+                result_lines = result_str.split('\n')
+                result_count = len([line for line in result_lines if line.strip() and not line.startswith('Error')])
+                print(f"   ✅ Found {result_count} results")
+                print(f"   📄 Preview: {result_str[:100]}..." if len(result_str) > 100 else f"   📄 Results: {result_str}")
+                
+                return result_str
                 
         except Exception as e:
             logger.error(f"MCP search failed: {str(e)}", exc_info=True)
-            return f"Error performing search via FastMCP: {str(e)}"
+            error_msg = f"Error performing search via FastMCP: {str(e)}"
+            print(f"   ❌ Search failed: {str(e)}")
+            return error_msg
     
     # Run the async function
     try:
         return asyncio.run(_search())
     except Exception as e:
-        return f"Error running search: {str(e)}"
+        error_msg = f"Error running search: {str(e)}"
+        print(f"   ❌ {error_msg}")
+        return error_msg
 
 def create_agent():
     """Create a LangChain agent with MCP search tool."""
@@ -174,14 +189,23 @@ IMPORTANT INSTRUCTIONS:
 - Never answer questions based on your training data or general knowledge alone
 - Always search first, then provide your answer based on the search results
 - If the search doesn't return relevant results, say so and suggest refining the search query
-- Always rephrase the question 2 times so you perform multiple searches: one time the original and two times rephrased
+- Always perform multiple searches to get comprehensive results:
+  1. Search with the original user question
+  2. Rephrase the question and search again (at least 2 different rephrasings)
+  3. Try different keywords or approaches if needed
+  4. This agent's domain is medical information, so focus on that if applicable
         
-HOW TO ANSWER: provide a list of titles with their URLs; no other information should be returned; ensure urls are unique
+HOW TO ANSWER: 
+- Provide a list of titles with their URLs from the search results
+- Ensure URLs are unique (no duplicates)
+- No other information should be returned except the titles and URLs
+- Use a clear, numbered list format
 
 Your workflow should be:
-1. Use the search_azure_ai tool with the user's question
-2. Analyze the search results
-3. Provide a comprehensive answer based on the search results"""),
+1. Perform the original search with the user's question
+2. Rephrase the question in different ways and search again
+3. Compile all unique results
+4. Present the final list of titles and URLs"""),
         ("placeholder", "{messages}")
     ])
     
@@ -222,6 +246,8 @@ def main():
                 continue
             
             try:
+                print(f"\n🤔 Agent is thinking and searching...")
+                
                 # Invoke the agent with the user's message
                 response = agent.invoke({
                     "messages": [HumanMessage(content=user_input)]
@@ -229,7 +255,8 @@ def main():
                 
                 # Get the last AI message from the response
                 ai_message = response["messages"][-1]
-                print(f"\n🤖 Agent: {ai_message.content}")
+                print(f"\n📋 Results:")
+                print(f"🤖 Agent: {ai_message.content}")
                 
             except Exception as e:
                 print(f"\n❌ Error: {str(e)}")
