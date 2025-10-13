@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Azure AI Search - Query Examples</title>
+<style>
+    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; }
+    h1 { margin-bottom: 8px; }
+    .meta { color: #666; margin-bottom: 24px; }
+    section { margin-bottom: 32px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px 16px; margin: 12px 0; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+    .title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+    .url { font-size: 12px; color: #2563eb; margin-bottom: 8px; word-break: break-all; }
+    .scores { font-size: 12px; color: #555; margin-bottom: 8px; }
+    .chunk { font-size: 14px; color: #111; }
+    .count { font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+<h1>Azure AI Search - Query Examples</h1>
+<div class='meta'>Keyword, vector (integrated), hybrid, and hybrid + semantic results</div>
+<section><h2>Keyword search</h2>
+<div class='count'>Total results: 0</div>
+</section>
+<section><h2>Vector search (integrated)</h2>
+<div class='count'>Total results: 5</div>
+<div class='card'>
+<div class='title'>Dummy Title 8</div>
+<div class='url'><a href='https://example.com/8' target='_blank' rel='noopener noreferrer'>https://example.com/8</a></div>
+<div class='scores'>score: 0.51662683 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 8. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 6</div>
+<div class='url'><a href='https://example.com/6' target='_blank' rel='noopener noreferrer'>https://example.com/6</a></div>
+<div class='scores'>score: 0.5159902 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 6. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 7</div>
+<div class='url'><a href='https://example.com/7' target='_blank' rel='noopener noreferrer'>https://example.com/7</a></div>
+<div class='scores'>score: 0.51575273 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 7. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 10</div>
+<div class='url'><a href='https://example.com/10' target='_blank' rel='noopener noreferrer'>https://example.com/10</a></div>
+<div class='scores'>score: 0.51558083 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 10. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 1</div>
+<div class='url'><a href='https://example.com/1' target='_blank' rel='noopener noreferrer'>https://example.com/1</a></div>
+<div class='scores'>score: 0.5152445 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 1. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+</section>
+<section><h2>Hybrid search (integrated)</h2>
+<div class='count'>Total results: 5</div>
+<div class='card'>
+<div class='title'>Dummy Title 8</div>
+<div class='url'><a href='https://example.com/8' target='_blank' rel='noopener noreferrer'>https://example.com/8</a></div>
+<div class='scores'>score: 0.01666666753590107 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 8. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 6</div>
+<div class='url'><a href='https://example.com/6' target='_blank' rel='noopener noreferrer'>https://example.com/6</a></div>
+<div class='scores'>score: 0.016393441706895828 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 6. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 7</div>
+<div class='url'><a href='https://example.com/7' target='_blank' rel='noopener noreferrer'>https://example.com/7</a></div>
+<div class='scores'>score: 0.016129031777381897 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 7. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 10</div>
+<div class='url'><a href='https://example.com/10' target='_blank' rel='noopener noreferrer'>https://example.com/10</a></div>
+<div class='scores'>score: 0.01587301678955555 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 10. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 1</div>
+<div class='url'><a href='https://example.com/1' target='_blank' rel='noopener noreferrer'>https://example.com/1</a></div>
+<div class='scores'>score: 0.015625 | reranker: None</div>
+<div class='chunk'>This is a sample chunk of content for document 1. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+</section>
+<section><h2>Hybrid + semantic search (integrated)</h2>
+<div class='count'>Total results: 5</div>
+<div class='card'>
+<div class='title'>Dummy Title 7</div>
+<div class='url'><a href='https://example.com/7' target='_blank' rel='noopener noreferrer'>https://example.com/7</a></div>
+<div class='scores'>score: 0.016129031777381897 | reranker: 0.9557338953018188</div>
+<div class='chunk'>This is a sample chunk of content for document 7. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 6</div>
+<div class='url'><a href='https://example.com/6' target='_blank' rel='noopener noreferrer'>https://example.com/6</a></div>
+<div class='scores'>score: 0.016393441706895828 | reranker: 0.9465177059173584</div>
+<div class='chunk'>This is a sample chunk of content for document 6. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 8</div>
+<div class='url'><a href='https://example.com/8' target='_blank' rel='noopener noreferrer'>https://example.com/8</a></div>
+<div class='scores'>score: 0.01666666753590107 | reranker: 0.925958514213562</div>
+<div class='chunk'>This is a sample chunk of content for document 8. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 10</div>
+<div class='url'><a href='https://example.com/10' target='_blank' rel='noopener noreferrer'>https://example.com/10</a></div>
+<div class='scores'>score: 0.01587301678955555 | reranker: 0.9089439511299133</div>
+<div class='chunk'>This is a sample chunk of content for document 10. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+<div class='card'>
+<div class='title'>Dummy Title 1</div>
+<div class='url'><a href='https://example.com/1' target='_blank' rel='noopener noreferrer'>https://example.com/1</a></div>
+<div class='scores'>score: 0.015625 | reranker: 0.8118194341659546</div>
+<div class='chunk'>This is a sample chunk of content for document 1. It demonstrates vector indexing and semantic ranking.</div>
+</div>
+</section>
+<section><h2>Hybrid + semantic (reranker > 2.1)</h2>
+<div class='count'>Total results: 0</div>
+</section>
+</body></html>
