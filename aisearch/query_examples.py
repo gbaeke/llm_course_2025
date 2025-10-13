@@ -127,7 +127,7 @@ def main() -> None:
     search_client = SearchClient(endpoint=endpoint, index_name=index_name, credential=credential)
 
     # Single query string used for keyword and integrated vector queries
-    query_text = "spaghetti carbonara"
+    query_text = "vector indexing and reranking"
 
     # 1) Keyword search only
     kw_results = search_client.search(
@@ -200,6 +200,20 @@ def main() -> None:
     cut_display_total = len(cut_items)
     print_results("Hybrid + semantic (reranker > 2.1)", cut_display_total, cut_items)
 
+    # 6) Hybrid (integrated) with filter: only show doc with id == '1'
+    # Using OData filter syntax; our key field is 'id' and it's filterable.
+    vq_text = VectorizableTextQuery(text=query_text, k_nearest_neighbors=5, fields="vector")
+    filtered_results = search_client.search(
+        search_text=query_text,
+        vector_queries=[vq_text],
+        filter="id eq '1'",
+        select=["id", "title", "url", "chunk"],
+        include_total_count=True,
+        top=5,
+    )
+    filt_total, filt_items = collect_results(filtered_results)
+    print_results("Hybrid (integrated) with filter id eq '1'", filt_total, filt_items)
+
     # Write HTML summary
     sections = [
         {"name": "Keyword search", "total": kw_total, "items": kw_items},
@@ -207,6 +221,7 @@ def main() -> None:
         {"name": "Hybrid search (integrated)", "total": hyb_total, "items": hyb_items},
         {"name": "Hybrid + semantic search (integrated)", "total": hybsem_total, "items": hybsem_items},
         {"name": "Hybrid + semantic (reranker > 2.1)", "total": cut_display_total, "items": cut_items},
+        {"name": "Hybrid (integrated) filter: id eq '1'", "total": filt_total, "items": filt_items},
     ]
     out_path = Path(__file__).with_name("query_results.html")
     render_html(sections, out_path)
