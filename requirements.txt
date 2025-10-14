@@ -13,3 +13,6 @@ langchain-mcp-adapters
 fastmcp
 uvicorn
 azure-search-documents
+numpy
+scikit-learn
+matplotlib
