@@ -16,3 +16,4 @@ azure-search-documents
 numpy
 scikit-learn
 matplotlib
+agent-framework
